@@ -1,0 +1,33 @@
+.productList{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.wrapper{
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 10px 50px;
+    transition: all ease-in-out .3s;
+}
+
+.wrapper:hover{
+    background-color: rgba(65, 105, 225, 0.05);
+    cursor: pointer;
+    outline: 1px solid royalblue;
+    outline-offset: -1px;
+    transform: scale(1.05);
+    border-radius: 15px;
+}
+
+.name{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.price{
+    font-weight: 400;
+}

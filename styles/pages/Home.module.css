@@ -1,0 +1,26 @@
+.buttonWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.button{
+    margin-top: 10px;
+    background-color: white;
+    width: 300px;
+    color: black;
+    border-radius: 15px;
+    transition: all ease-in-out .2s;
+    box-shadow: 10px 10px 0 royalblue;
+    outline: 3px solid royalblue;
+    outline-offset: -3px;
+}
+
+.button:hover{
+    background-color: rgb(252, 252, 252);
+    color: black;
+    outline: 3px solid royalblue;
+    outline-offset: -3px;
+    cursor: pointer;
+    box-shadow: 0 0 0 royalblue;
+}

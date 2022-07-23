@@ -4,6 +4,9 @@ import Head from "next/head"
 import axios from "axios"
 import Navbar from "../components/Navbar"
 import Loader from "../components/Loader"
+import Link from "next/link"
+import style from "../styles/pages/Home.module.css"
+import ProductList from "../components/ProductList"
 
 const Home: NextPage = () => {
     const [products, setProducts] = useState([])
@@ -14,18 +17,9 @@ const Home: NextPage = () => {
         setProducts(results)
     }
 
-    const formatRupiah = (val: number) => {
-        return new Intl.NumberFormat("id-ID", {
-            style: "currency",
-            currency: "IDR"
-        }).format(val)
-    }
-
     useEffect(() => {
         getProducts()
     }, [])
-
-    console.log(products)
 
     return (
         <React.Fragment>
@@ -41,14 +35,16 @@ const Home: NextPage = () => {
             ) : (
                 <ul style={{ textAlign: "center", marginTop: "1opx" }}>
                     {products.map(({ name, price }, index) => (
-                        <li key={index}>
-                            <h4>
-                                {name} - {formatRupiah(price)}
-                            </h4>
-                        </li>
+                        <ProductList key={index} name={name} price={price} />
                     ))}
                 </ul>
             )}
+
+            <div className={style.buttonWrapper}>
+                <Link href="/products/add">
+                    <h1 className={style.button}>Add</h1>
+                </Link>
+            </div>
         </React.Fragment>
     )
 }

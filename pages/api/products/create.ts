@@ -7,18 +7,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
         const { name, price } = req.body
 
-        // if (!name || !price) {
-        //     return res.status(400).json({ msg: "please fill all fields" })
-        // }
-
-        await prisma.product.create({
-            data: {
-                name: "samsung",
-                price: 10900000
-            }
+        const product = await prisma.product.create({
+            data: { name, price }
         })
 
-        res.status(200).json({ msg: "product created" })
+        res.status(200).json(product)
     } catch (err) {
         console.log(err)
     }
