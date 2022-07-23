@@ -1,8 +1,32 @@
+import React, { useState, useEffect } from "react"
 import type { NextPage } from "next"
 import Head from "next/head"
-import React from "react"
+import axios from "axios"
+import Navbar from "../components/Navbar"
+import Loader from "../components/Loader"
 
 const Home: NextPage = () => {
+    const [products, setProducts] = useState([])
+
+    const getProducts = async () => {
+        const response = await axios.get("/api/products")
+        const results = response.data
+        setProducts(results)
+    }
+
+    const formatRupiah = (val: number) => {
+        return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR"
+        }).format(val)
+    }
+
+    useEffect(() => {
+        getProducts()
+    }, [])
+
+    console.log(products)
+
     return (
         <React.Fragment>
             <Head>
@@ -11,7 +35,20 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <h1>Next Crud</h1>
+            <Navbar />
+            {!products.length ? (
+                <Loader />
+            ) : (
+                <ul style={{ textAlign: "center", marginTop: "1opx" }}>
+                    {products.map(({ name, price }, index) => (
+                        <li key={index}>
+                            <h4>
+                                {name} - {formatRupiah(price)}
+                            </h4>
+                        </li>
+                    ))}
+                </ul>
+            )}
         </React.Fragment>
     )
 }
